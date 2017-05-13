@@ -58,6 +58,9 @@ class SettingsGenerator extends Command
         // Create the CRUD Request and show output
         Artisan::call('backpack:crud-request', ['name' => "{$name}Setting"]);
         echo Artisan::output();
+        // Create the CRUD Seeder and show output
+        Artisan::call('capripio:seeder', ['name' => "{$name}Setting"]);
+        echo Artisan::output();
 
         return true;
     }

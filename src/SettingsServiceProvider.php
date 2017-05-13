@@ -4,6 +4,7 @@ namespace Capripio\SettingsGenerator;
 
 use Capripio\SettingsGenerator\Commands\CrudControllerCommand;
 use Capripio\SettingsGenerator\Commands\ModelBackpackCommand;
+use Capripio\SettingsGenerator\Commands\SeederCommand;
 use Capripio\SettingsGenerator\Commands\SettingsGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +14,7 @@ class SettingsServiceProvider extends ServiceProvider
         SettingsGenerator::class,
         CrudControllerCommand::class,
         ModelBackpackCommand::class,
+        SeederCommand::class
     ];
     /**
      * Bootstrap any application services.
