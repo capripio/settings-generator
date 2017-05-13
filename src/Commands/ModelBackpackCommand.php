@@ -5,7 +5,7 @@ namespace Capripio\SettingsGenerator\Commands;
 
 class ModelBackpackCommand extends \Backpack\Generators\Console\Commands\ModelBackpackCommand
 {
-    protected $name = 'capripio:model';
+    protected $name = 'capripio:crud-model';
     protected $signature = 'capripio:model {name} {--softdelete}';
     protected function getStub()
     {
