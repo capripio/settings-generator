@@ -12,7 +12,7 @@ class SettingsGenerator extends Command
      *
      * @var string
      */
-    protected $signature = 'backpack:settings {name}';
+    protected $signature = 'capripio:settings {name}';
 
 
 
