@@ -1,0 +1,72 @@
+<?php
+
+namespace DummyNamespace;
+
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+
+use App\Http\Requests\DummyClassRequest as StoreRequest;
+use App\Http\Requests\DummyClassRequest as UpdateRequest;
+
+class DummyClassCrudController extends CrudController
+{
+    public function setup()
+    {
+        $this->crud->setModel('App\Models\DummyClass');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/dummy_class');
+        $this->crud->setEntityNameStrings('dummy_class', 'DummyTable');
+
+        $this->crud->denyAccess(['create', 'delete']);
+        $this->crud->setColumns([
+            [
+                'name'  => 'name',
+                'label' => trans('capripio::settings.name'),
+            ],
+            [
+                'name'  => 'value',
+                'label' => trans('capripio::settings.value'),
+            ],
+            [
+                'name'  => 'description',
+                'label' => trans('capripio::settings.description'),
+            ],
+        ]);
+        $this->crud->addField([
+            'name'       => 'name',
+            'label'      => trans('capripio::settings.name'),
+            'type'       => 'text',
+            'attributes' => [
+                'disabled' => 'disabled',
+            ],
+        ]);
+
+    }
+
+    public function index()
+    {
+       $this->crud->addClause('where', 'active', 1);
+       return parent::index();
+    }
+    public function store(StoreRequest $request)
+    {
+       return parent::storeCrud();
+    }
+
+    public function edit($id)
+    {
+        $this->crud->hasAccessOrFail('update');
+        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->crud->addField((array) json_decode($this->data['entry']->field)); // <---- this is where it's different
+        $this->data['crud'] = $this->crud;
+        $this->data['saveAction'] = $this->getSaveAction();
+        $this->data['fields'] = $this->crud->getUpdateFields($id);
+        $this->data['title'] = trans('capripio::crud.edit').' '.$this->crud->entity_name;
+        $this->data['id'] = $id;
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view($this->crud->getEditView(), $this->data);
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        return parent::updateCrud();
+    }
+}

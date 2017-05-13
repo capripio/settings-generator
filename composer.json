@@ -1,0 +1,22 @@
+{
+    "name": "capripio/settings-generator",
+    "description": "Generate Setting template for Backpack",
+    "type": "backpack,laravel,settings,generator",
+    "require": {
+      "backpack/crud": "^3.2",
+      "laracasts/generators": "^1.1",
+      "backpack/generators": "^1.1",
+      "illuminate/support": "^5.4"
+    },
+    "authors": [
+        {
+            "name": "Muhammad Asif",
+            "email": "capripio@gmail.com"
+        }
+    ],
+    "autoload":{
+      "psr-4":{
+        "Capripio\\SettingsGenerator\\": "src/"
+      }
+    }
+}
