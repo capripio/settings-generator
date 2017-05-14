@@ -32,7 +32,7 @@ class SettingsServiceProvider extends ServiceProvider
                 $table = array_values($table);
                 $table = $table[0];
                 if (preg_match('/_settings$/',$table) && count(Schema::getColumnListing($table))) {
-                    $settings = DB::table($table)->all();
+                    $settings = DB::table($table)->get();
                     $temp = str_replace("_settings","",$table);
                      foreach ($settings as $key => $setting) {
                          Config::set("{$temp}.".$setting->key, $setting->value); //TODO:: add into docs
