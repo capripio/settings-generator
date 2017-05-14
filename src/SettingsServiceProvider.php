@@ -8,6 +8,7 @@ use Capripio\SettingsGenerator\Commands\SeederCommand;
 use Capripio\SettingsGenerator\Commands\SettingsGenerator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class SettingsServiceProvider extends ServiceProvider
 {
