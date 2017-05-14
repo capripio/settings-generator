@@ -27,6 +27,9 @@ class SettingsServiceProvider extends ServiceProvider
         if(!\App::runningInConsole()){
             $tables = DB::select('SHOW TABLES;');
             foreach($tables as $table){
+                $table = (array) $table;
+                $table = array_values($table);
+                $table = $table[0];
                 if (preg_match('/_settings$/',$table) && count(Schema::getColumnListing($table))) {
                     $settings = DB::table($table)->all();
                     $temp = str_replace("_settings","",$table);
