@@ -23,6 +23,7 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), 'capripio');
         // publish the migrations and seeds
         $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/database/seeds/' => database_path('seeds')], 'seeds');
