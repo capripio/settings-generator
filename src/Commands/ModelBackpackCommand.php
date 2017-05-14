@@ -16,4 +16,10 @@ class ModelBackpackCommand extends \Backpack\Generators\Console\Commands\ModelBa
         return __DIR__.'/../stubs/model.stub';
     }
 
+
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace.'\Models';
+    }
+
 }

@@ -46,7 +46,7 @@ class SettingsGenerator extends Command
         Artisan::call('make:migration:schema',[
             'name'  =>  "create_{$name}_settings_table",
             '--model' =>  0,
-            '--schema'=> "\"key:string,name:string,description:string:nullable,value:longText,nullable,field:text:nullable,active:tinyInteger\""
+            '--schema'=> "key:string,name:string,description:string:nullable,value:longText:nullable,field:text:nullable,active:tinyInteger"
         ]);
         $name = ucfirst($name);
         // Create the CRUD Controller and show output

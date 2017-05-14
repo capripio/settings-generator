@@ -23,7 +23,12 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // publish the migrations and seeds
+        $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__.'/database/seeds/' => database_path('seeds')], 'seeds');
+
+        // publish translation files
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/capripio')], 'lang');
     }
 
     /**
