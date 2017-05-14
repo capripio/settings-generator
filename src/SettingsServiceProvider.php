@@ -9,6 +9,7 @@ use Capripio\SettingsGenerator\Commands\SettingsGenerator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Config;
 
 class SettingsServiceProvider extends ServiceProvider
 {
