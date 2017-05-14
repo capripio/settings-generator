@@ -7,6 +7,7 @@ use Capripio\SettingsGenerator\Commands\ModelBackpackCommand;
 use Capripio\SettingsGenerator\Commands\SeederCommand;
 use Capripio\SettingsGenerator\Commands\SettingsGenerator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class SettingsServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,19 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(!\App::runningInConsole()){
+            $tables = DB::select('SHOW TABLES;');
+            foreach($tables as $table){
+                if (preg_match('/_settings$/',$table) && count(Schema::getColumnListing($table))) {
+                    $settings = DB::table($table)->all();
+                    $temp = str_replace("_settings","",$table);
+                     foreach ($settings as $key => $setting) {
+                         Config::set("{$temp}.".$setting->key, $setting->value); //TODO:: add into docs
+                     }
+                }
+            }
+        }
+        
         $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), 'capripio');
         // publish the migrations and seeds
         $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
