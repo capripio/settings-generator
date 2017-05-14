@@ -38,7 +38,15 @@ class DummyClassCrudController extends CrudController
                 'disabled' => 'disabled',
             ],
         ]);
-
+        
+        $this->crud->addField([
+            'name'       => 'description',
+            'label'      => trans('capripio::settings.description'),
+            'type'       => 'textarea',
+            'attributes' => [
+                'disabled' => 'disabled',
+            ],
+        ]);
     }
 
     public function index()
