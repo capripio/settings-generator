@@ -26,7 +26,7 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(!\App::runningInConsole()){
+        //if(!\App::runningInConsole()){
             $tables = DB::select('SHOW TABLES;');
             foreach($tables as $table){
                 $table = (array) $table;
@@ -40,7 +40,7 @@ class SettingsServiceProvider extends ServiceProvider
                      }
                 }
             }
-        }
+        //}
         
         $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), 'capripio');
         // publish the migrations and seeds
